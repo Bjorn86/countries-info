@@ -1,6 +1,12 @@
 /* VENDOR IMPORTS */
 @import url('../vendor/normalize.css');
-@import url('../vendor/font.scss');
+@import url('../vendor/_font.scss');
 
-/* APP */
-@import url('../components/App/app.scss');
+/* COMPONENTS */
+@import url('../components/App/_app.scss');
+@import url('../components/Header/_header.scss');
+@import url('../components/MainContent/_main-content.scss');
+@import url('../components/Filter/_filter.scss');
+@import url('../components/RegionSelect/_region-select.scss');
+@import url('../components/Cards/_cards.scss');
+@import url('../components/Card/_card.scss');

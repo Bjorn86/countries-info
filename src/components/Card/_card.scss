@@ -1,0 +1,55 @@
+.card {
+  width: 264px;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.6s;
+  &:hover {
+    @include shadow;
+  }
+  &_theme_dark {
+    &:hover {
+      @include shadow-light;
+    }
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &__country-flag {
+    width: 264px;
+    height: 160px;
+    object-fit: cover;
+    @include base-text($textS, 300, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__description-wrapper {
+    padding: 27px 0 34px 22px;
+    background: $white;
+    &_theme_dark {
+      background: $elementsDM;
+    }
+  }
+  &__country-name {
+    margin: 0 0 18px;
+    @include base-text(18px, 800, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__country-info {
+    margin: 0 0 8px;
+    @include base-text($textS, 300, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__country-info-accent {
+    @include base-text($textS, 600, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+}

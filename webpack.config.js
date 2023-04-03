@@ -94,7 +94,15 @@ module.exports = {
             },
           },
           'postcss-loader',
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `
+                @import "src/components/Common/_mixins.scss";
+                @import "src/components/Common/_variables.scss";
+              `,
+            },
+          },
         ],
       },
       {
