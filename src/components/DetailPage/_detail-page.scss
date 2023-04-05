@@ -1,0 +1,119 @@
+.detail-page {
+  max-width: 1440px;
+  box-sizing: border-box;
+  padding: 80px 80px;
+  margin: 0 auto;
+  &__btn-back {
+    width: 135px;
+    height: 42px;
+    padding: 0 0 0 22px;
+    border: none;
+    border-radius: 5px;
+    background: url('../../images/arrow-left-long.svg') 32px center/18px
+        no-repeat,
+      $white;
+    @include shadow;
+    @include base-text($textM, 600, $textLM);
+    cursor: pointer;
+    transition: opacity 0.6s;
+    &:hover {
+      opacity: 0.6;
+    }
+    &_theme_dark {
+      background: url('../../images/arrow-left-long-filled.svg') 32px
+          center/18px no-repeat,
+        $elementsDM;
+      color: $white;
+    }
+  }
+  &__wrapper {
+    max-width: 100%;
+    padding-top: 78px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  &__flag {
+    width: 560px;
+    object-fit: contain;
+    @include base-text($textM, 600, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__description-wrapper {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+  &__country-name {
+    margin: 0;
+    padding-top: 42px;
+    @include base-text(32px, 800, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__list-wrapper {
+    padding-top: 33px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__description-list {
+    width: 252px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  &__description-info {
+    padding-bottom: 13px;
+    @include base-text($textM, 300, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__description-info-accent {
+    @include base-text($textM, 600, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__border-wrapper {
+    padding-top: 54px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  &__border-info {
+    margin: 0;
+    @include base-text($textM, 600, $textLM);
+    &_theme_dark {
+      color: $white;
+    }
+  }
+  &__border-btn-wrapper {
+    max-width: 458px;
+  }
+  &__btn-country {
+    margin-top: 6px;
+    margin-right: 10px;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 5px;
+    background: $white;
+    @include shadow;
+    @include base-text($textS, 300, $textLM);
+    cursor: pointer;
+    transition: opacity 0.6s;
+    &:hover {
+      opacity: 0.6;
+    }
+    &_theme_dark {
+      background: $elementsDM;
+      color: $white;
+    }
+  }
+}

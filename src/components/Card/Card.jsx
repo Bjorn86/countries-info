@@ -24,6 +24,7 @@ function Card({ card, isDarkTheme }) {
           >
             {card.name}
           </h2>
+          {/* TODO Заменить на список */}
           <p
             className={`card__country-info ${
               isDarkTheme ? 'card__country-info_theme_dark' : ''

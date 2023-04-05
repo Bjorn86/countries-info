@@ -42,7 +42,7 @@
     @include base-text($textS, 300, $textLM);
     cursor: pointer;
     user-select: none;
-    transition: 0.6s;
+    transition: opacity 0.6s;
     &:first-child {
       padding-top: 20px;
     }
