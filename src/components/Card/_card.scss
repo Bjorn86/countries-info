@@ -1,21 +1,6 @@
 .card {
-  width: 264px;
-  border-radius: 5px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: box-shadow 0.6s;
-  &:hover {
-    @include shadow;
-  }
-  &_theme_dark {
-    &:hover {
-      @include shadow-light;
-    }
-  }
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
   &__country-flag {
     width: 264px;
     height: 160px;
@@ -26,7 +11,7 @@
     }
   }
   &__description-wrapper {
-    padding: 27px 0 34px 22px;
+    padding: 27px 22px 34px;
     background: $white;
     &_theme_dark {
       background: $elementsDM;
@@ -35,13 +20,23 @@
   &__country-name {
     margin: 0 0 18px;
     @include base-text(18px, 800, $textLM);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     &_theme_dark {
       color: $white;
     }
   }
+  &__country-description-list {
+    padding: 0;
+    list-style: none;
+  }
   &__country-info {
     margin: 0 0 8px;
     @include base-text($textS, 300, $textLM);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     &_theme_dark {
       color: $white;
     }

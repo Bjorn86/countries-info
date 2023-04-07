@@ -42,7 +42,7 @@
     }
   }
   &__description-wrapper {
-    max-width: 600px;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
   }
@@ -70,7 +70,11 @@
   }
   &__description-info {
     padding-bottom: 13px;
+    margin: 0;
     @include base-text($textM, 300, $textLM);
+    &_position_bottom {
+      padding-bottom: 0;
+    }
     &_theme_dark {
       color: $white;
     }
@@ -94,10 +98,12 @@
       color: $white;
     }
   }
-  &__border-btn-wrapper {
+  &__border-link-wrapper {
     max-width: 458px;
+    display: flex;
+    flex-wrap: wrap;
   }
-  &__btn-country {
+  &__link-country {
     margin-top: 6px;
     margin-right: 10px;
     padding: 7px 10px;
@@ -106,6 +112,7 @@
     background: $white;
     @include shadow;
     @include base-text($textS, 300, $textLM);
+    text-decoration: none;
     cursor: pointer;
     transition: opacity 0.6s;
     &:hover {

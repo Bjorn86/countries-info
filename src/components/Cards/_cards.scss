@@ -9,8 +9,25 @@
     margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
-    grid-gap: 76px 74px;
+    gap: 76px 74px;
     justify-items: center;
     list-style: none;
+  }
+  &__item {
+    width: 264px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: box-shadow 0.6s;
+    &:hover {
+      @include shadow;
+    }
+    &_theme_dark {
+      &:hover {
+        @include shadow-light;
+      }
+    }
+  }
+  &__item-link {
+    text-decoration: none;
   }
 }
