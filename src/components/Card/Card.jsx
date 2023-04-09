@@ -2,11 +2,6 @@ import React from 'react';
 
 // CARD COMPONENT
 function Card({ card, isDarkTheme }) {
-  // HANDLE CARD CLICK
-  /* const handleClick = useCallback(() => {
-    onCardClick(card);
-  }, [card, onCardClick]); */
-
   return (
     <div className='card'>
       <img

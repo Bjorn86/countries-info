@@ -35,6 +35,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: `./static/js/${filename('js')}`,
+    publicPath: '/',
   },
   optimization: optimization(),
   devtool: isDev ? 'source-map' : false,
@@ -50,6 +51,7 @@ module.exports = {
     },
     hot: isDev,
     liveReload: true,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

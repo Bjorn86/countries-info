@@ -1,25 +1,14 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 // REGION SELECT COMPONENT
-function RegionSelect({ isDarkTheme }) {
-  // STATE VARIABLES
-  const [isOptionsOpen, setOptionsClass] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(0);
-
-  // OPTIONS LIST
-  const optionsList = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
-
-  // SWITCH OPEN\CLOSE MENU OPTIONS
-  const switchOptionMenu = useCallback(() => {
-    setOptionsClass(!isOptionsOpen);
-  }, [isOptionsOpen]);
-
-  // SET SELECTED OPTION AND CLOSE DROPDOWN MENU
-  const setSelectedOptionAndCloseDropdown = useCallback((index) => {
-    setSelectedOption(index);
-    setOptionsClass(false);
-  }, []);
-
+function RegionSelect({
+  isDarkTheme,
+  isOptionsOpen,
+  onOptionMenuClick,
+  onOptionSelect,
+  selectedOption,
+  optionsList,
+}) {
   // HANDLE KEY NAVIGATION
   const handleKeyDown = useCallback(
     (evt, index) => {
@@ -28,13 +17,13 @@ function RegionSelect({ isDarkTheme }) {
         case 'SpaceBar':
         case 'Enter':
           evt.preventDefault();
-          setSelectedOptionAndCloseDropdown(index);
+          onOptionSelect(index);
           break;
         default:
           break;
       }
     },
-    [setSelectedOptionAndCloseDropdown],
+    [onOptionSelect],
   );
 
   return (
@@ -44,7 +33,7 @@ function RegionSelect({ isDarkTheme }) {
           isDarkTheme ? 'region-select__btn_theme_dark' : ''
         }`}
         type='button'
-        onClick={switchOptionMenu}
+        onClick={onOptionMenuClick}
         aria-haspopup='listbox'
         aria-expanded={isOptionsOpen}
       >
@@ -70,8 +59,7 @@ function RegionSelect({ isDarkTheme }) {
             tabIndex={0}
             onKeyDown={handleKeyDown(index)}
             onClick={() => {
-              setSelectedOption(index);
-              setOptionsClass(false);
+              onOptionSelect(index);
             }}
           >
             {option}

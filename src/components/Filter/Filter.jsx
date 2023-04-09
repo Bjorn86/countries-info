@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // IMPORT COMPONENTS
+import Search from '../Search/Search.jsx';
 import RegionSelect from '../RegionSelect/RegionSelect.jsx';
 
 // FILTER COMPONENT
-function Filter({ isDarkTheme }) {
-  // STATE VARIABLES
-  const [selectedRegion, setSelectedRegion] = useState('all');
+function Filter({
+  isDarkTheme,
+  onSearchChange,
+  searchTerm,
+  isOptionsOpen,
+  onOptionMenuClick,
+  onOptionSelect,
+  selectedOption,
+  optionsList,
+}) {
   return (
     <section className='filter'>
-      <form
-        action='#'
-        name='filter'
-        className='filter__wrapper'
-        id='filter'
-        noValidate
-      >
-        <input
-          type='text'
-          className={`filter__search ${
-            isDarkTheme ? 'filter__search_theme_dark' : ''
-          }`}
-          form='filter'
-          name='filter-search'
-          placeholder='Search for a country...'
+      <div className='filter__wrapper'>
+        <Search
+          isDarkTheme={isDarkTheme}
+          onSearchChange={onSearchChange}
+          searchTerm={searchTerm}
         />
-        <RegionSelect isDarkTheme={isDarkTheme} />
-      </form>
+        <RegionSelect
+          isDarkTheme={isDarkTheme}
+          isOptionsOpen={isOptionsOpen}
+          onOptionMenuClick={onOptionMenuClick}
+          onOptionSelect={onOptionSelect}
+          selectedOption={selectedOption}
+          optionsList={optionsList}
+        />
+      </div>
     </section>
   );
 }

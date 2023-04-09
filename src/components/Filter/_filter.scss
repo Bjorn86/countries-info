@@ -9,28 +9,4 @@
     justify-content: space-between;
     align-items: center;
   }
-  &__search {
-    width: 396px;
-    height: 52px;
-    padding: 2px 10px 2px 73px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    @include shadow;
-    background: url('../../images/search.svg') 30px center/20px no-repeat,
-      $white;
-    @include base-text($textS, 300, $inputLM);
-    &::placeholder {
-      color: $inputLM;
-    }
-    &_theme_dark {
-      background: url('../../images/search-filled.svg') 30px center/20px
-          no-repeat,
-        $elementsDM;
-      color: $white;
-      &::placeholder {
-        color: $white;
-      }
-    }
-  }
 }

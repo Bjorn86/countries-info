@@ -1,24 +1,20 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // DETAIL PAGE COMPONENT
-function DetailPage({ card, cards, isDarkTheme }) {
+function DetailPage({ isDarkTheme, cards }) {
   // HOOKS
   const { countryCode } = useParams();
   const navigate = useNavigate();
+  const [card, setCard] = useState(null);
 
-  // SET CARD
-  const setCard = useCallback(
-    (countryCode) => {
-      for (let currentCard of cards) {
-        if (countryCode.toUpperCase() === currentCard.cca3) {
-          return currentCard;
-        }
-      }
-    },
-    [cards],
-  );
-  card = setCard(countryCode);
+  // SET CARD STATE WHEN MOUNTING
+  useEffect(() => {
+    const findCard = cards.find(
+      (card) => card.cca3 === countryCode.toUpperCase(),
+    );
+    setCard(findCard);
+  }, [cards, countryCode]);
 
   // HANDLE LANGUAGES RENDER
   const handleLanguages = useCallback((card) => {
@@ -72,6 +68,8 @@ function DetailPage({ card, cards, isDarkTheme }) {
     [isDarkTheme],
   );
 
+  /* TODO Возвращать 404 страницу */
+  if (!card) return null;
   return (
     <section className='detail-page'>
       <button
@@ -115,7 +113,8 @@ function DetailPage({ card, cards, isDarkTheme }) {
                 >
                   Native Name:
                 </span>{' '}
-                {Object.values(card.name.nativeName)[0].common}
+                {Object.values(card.name.nativeName)[0]?.common ||
+                  card.name.common}
               </li>
               <li
                 className={`detail-page__description-info ${

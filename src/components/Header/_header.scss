@@ -16,6 +16,9 @@
     justify-content: space-between;
     align-items: center;
   }
+  &__link {
+    text-decoration: none;
+  }
   &__title {
     margin: 0;
     @include base-text(24px, 800, $textLM);

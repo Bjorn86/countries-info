@@ -6,12 +6,22 @@ import Header from '../Header/Header.jsx';
 import Filter from '../Filter/Filter.jsx';
 
 // APP LAYOUT COMPONENT
-function PageContent({ isDarkTheme, onThemeSwitchClick }) {
+function PageContent({
+  isDarkTheme,
+  onThemeToggleClick,
+  onSearchChange,
+  searchTerm,
+  isOptionsOpen,
+  onOptionMenuClick,
+  onOptionSelect,
+  selectedOption,
+  optionsList,
+}) {
   return (
     <>
       <Header
         isDarkTheme={isDarkTheme}
-        onThemeSwitchClick={onThemeSwitchClick}
+        onThemeToggleClick={onThemeToggleClick}
       />
       <main
         className={`page-content ${
@@ -19,7 +29,21 @@ function PageContent({ isDarkTheme, onThemeSwitchClick }) {
         }`}
       >
         <Routes>
-          <Route path='/' element={<Filter isDarkTheme={isDarkTheme} />} />
+          <Route
+            path='/'
+            element={
+              <Filter
+                isDarkTheme={isDarkTheme}
+                onSearchChange={onSearchChange}
+                searchTerm={searchTerm}
+                isOptionsOpen={isOptionsOpen}
+                onOptionMenuClick={onOptionMenuClick}
+                onOptionSelect={onOptionSelect}
+                selectedOption={selectedOption}
+                optionsList={optionsList}
+              />
+            }
+          />
         </Routes>
         <Outlet />
       </main>

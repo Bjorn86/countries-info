@@ -1,15 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 
 // SEARCH COMPONENT
-function Search({ isDarkTheme }) {
-  // STATE VARIABLES
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // HANDLE INPUT CHANGE
-  const handleChange = useCallback((evt) => {
-    setSearchTerm(evt.target.value);
-  }, []);
-
+function Search({ isDarkTheme, onSearchChange, searchTerm }) {
   return (
     <input
       type='text'
@@ -17,7 +9,7 @@ function Search({ isDarkTheme }) {
       name='search'
       placeholder='Search for a country...'
       value={searchTerm}
-      onChange={handleChange}
+      onChange={(evt) => onSearchChange(evt.target.value)}
     />
   );
 }
