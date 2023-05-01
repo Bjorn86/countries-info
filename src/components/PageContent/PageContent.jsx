@@ -8,12 +8,13 @@ import Filter from '../Filter/Filter.jsx';
 // APP LAYOUT COMPONENT
 function PageContent({
   isDarkTheme,
-  onThemeToggleClick,
+  onThemeSwitchClick,
   onSearchChange,
   searchTerm,
   isOptionsOpen,
   onOptionMenuClick,
   onOptionSelect,
+  toSwitchOptions,
   selectedOption,
   optionsList,
 }) {
@@ -21,7 +22,7 @@ function PageContent({
     <>
       <Header
         isDarkTheme={isDarkTheme}
-        onThemeToggleClick={onThemeToggleClick}
+        onThemeSwitchClick={onThemeSwitchClick}
       />
       <main
         className={`page-content ${
@@ -39,6 +40,7 @@ function PageContent({
                 isOptionsOpen={isOptionsOpen}
                 onOptionMenuClick={onOptionMenuClick}
                 onOptionSelect={onOptionSelect}
+                toSwitchOptions={toSwitchOptions}
                 selectedOption={selectedOption}
                 optionsList={optionsList}
               />

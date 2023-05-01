@@ -18,7 +18,10 @@ function DetailPage({ isDarkTheme, cards }) {
 
   // HANDLE LANGUAGES RENDER
   const handleLanguages = useCallback((card) => {
-    return Object.values(card.languages).join(', ');
+    return (
+      Object.values(card.languages).join(', ') ||
+      'the country does not have an official language'
+    );
   }, []);
 
   // HANDLE CURRENCIES RENDER
@@ -28,7 +31,10 @@ function DetailPage({ isDarkTheme, cards }) {
       let currency = card.currencies[key];
       currenciesArr.push(currency.name);
     }
-    return currenciesArr.join(', ');
+    return (
+      currenciesArr.join(', ') ||
+      'the country does not have an official currency'
+    );
   }, []);
 
   // HANDLE BORDER COUNTRIES LINKS RENDER
@@ -36,13 +42,13 @@ function DetailPage({ isDarkTheme, cards }) {
     (card, cards) => {
       let borders = card.borders;
       let nameCountries = [];
-      for (let inputCode of borders) {
-        for (let cardItem of cards) {
+      borders.forEach((inputCode) => {
+        cards.forEach((cardItem) => {
           if (inputCode === cardItem.cca3) {
             nameCountries.push(cardItem.name.common);
           }
-        }
-      }
+        });
+      });
       return nameCountries.length !== 0 ? (
         nameCountries.map((country, index) => (
           <Link
@@ -61,7 +67,7 @@ function DetailPage({ isDarkTheme, cards }) {
             isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
           }`}
         >
-          there are no land borders
+          the country has no land borders
         </p>
       );
     },
@@ -162,7 +168,7 @@ function DetailPage({ isDarkTheme, cards }) {
                 >
                   Sub Region:
                 </span>{' '}
-                {card.subregion}
+                {card.subregion || 'the country does not have a subregion'}
               </li>
               <li
                 className={`detail-page__description-info ${
@@ -178,7 +184,7 @@ function DetailPage({ isDarkTheme, cards }) {
                 >
                   Capital:
                 </span>{' '}
-                {card.capital.join(', ') || 'there is no capital'}
+                {card.capital.join(', ') || 'the country has no capital'}
               </li>
             </ul>
             <ul className='detail-page__description-list'>
@@ -196,7 +202,7 @@ function DetailPage({ isDarkTheme, cards }) {
                 >
                   Top Level Domain:
                 </span>{' '}
-                {card.tld.join(', ')}
+                {card.tld.join(', ') || 'the country has no top level domain'}
               </li>
               <li
                 className={`detail-page__description-info ${

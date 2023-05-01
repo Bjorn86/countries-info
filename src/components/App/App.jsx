@@ -82,14 +82,26 @@ function App() {
   }, []);
 
   // TOGGLE THEME
-  const toggleTheme = useCallback(() => {
+  const switchTheme = useCallback(() => {
     setDarkThemeClass(!isDarkTheme);
   }, [isDarkTheme]);
 
   // TOGGLE OPEN\CLOSE MENU OPTIONS
-  const toggleOptionMenu = useCallback(() => {
-    setOptionsClass(!isOptionsOpen);
-  }, [isOptionsOpen]);
+  const toggleOptionMenu = useCallback(
+    (evt) => {
+      if (evt.key === 'Escape') {
+        setOptionsClass(false);
+      } else {
+        setOptionsClass(!isOptionsOpen);
+      }
+    },
+    [isOptionsOpen],
+  );
+
+  // OPTION SWITCH
+  const optionSwitch = useCallback((index) => {
+    setSelectedOption(index);
+  }, []);
 
   // SET SELECTED OPTION AND CLOSE DROPDOWN MENU
   const setOptionAndClose = useCallback((index) => {
@@ -106,12 +118,13 @@ function App() {
             element={
               <PageContent
                 isDarkTheme={isDarkTheme}
-                onThemeToggleClick={toggleTheme}
+                onThemeSwitchClick={switchTheme}
                 onSearchChange={handleSearchChange}
                 searchTerm={searchTerm}
                 isOptionsOpen={isOptionsOpen}
                 onOptionMenuClick={toggleOptionMenu}
                 onOptionSelect={setOptionAndClose}
+                toSwitchOptions={optionSwitch}
                 selectedOption={selectedOption}
                 optionsList={optionsList}
               />
@@ -140,12 +153,10 @@ function App() {
 
 export default App;
 
-/* TODO На основе Антарктики поработать с пустыми полями карточки */
-/* TODO Lazy Load на отрисовку карточек */
 /* TODO Адаптив */
 /* TODO Доступность */
-/* TODO Переделать циклы в методы */
 /* TODO В RegionSelect сценарии для различных кнопок */
 /* TODO Новая файловая структура */
 /* TODO Сделать заглушку если поиск не дал результатов */
 /* TODO Подумать над подставлением региона в название фильтра */
+/* TODO При открытии карточки в новой вкладке сбрасывается тема */

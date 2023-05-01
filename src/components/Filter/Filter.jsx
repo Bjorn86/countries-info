@@ -12,6 +12,7 @@ function Filter({
   isOptionsOpen,
   onOptionMenuClick,
   onOptionSelect,
+  toSwitchOptions,
   selectedOption,
   optionsList,
 }) {
@@ -28,6 +29,7 @@ function Filter({
           isOptionsOpen={isOptionsOpen}
           onOptionMenuClick={onOptionMenuClick}
           onOptionSelect={onOptionSelect}
+          toSwitchOptions={toSwitchOptions}
           selectedOption={selectedOption}
           optionsList={optionsList}
         />

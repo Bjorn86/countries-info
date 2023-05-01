@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Header({ isDarkTheme, onThemeToggleClick }) {
+function Header({ isDarkTheme, onThemeSwitchClick }) {
   return (
     <header className={`header ${isDarkTheme ? 'header_theme_dark' : ''}`}>
       <div className='header__wrapper'>
@@ -20,7 +20,7 @@ function Header({ isDarkTheme, onThemeToggleClick }) {
             isDarkTheme ? 'header__btn_theme_dark' : ''
           }`}
           type='button'
-          onClick={onThemeToggleClick}
+          onClick={onThemeSwitchClick}
         >
           {isDarkTheme ? 'Light Mode' : 'Dark Mode'}
         </button>

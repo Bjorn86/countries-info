@@ -6,6 +6,7 @@ function RegionSelect({
   isOptionsOpen,
   onOptionMenuClick,
   onOptionSelect,
+  toSwitchOptions,
   selectedOption,
   optionsList,
 }) {
@@ -13,7 +14,6 @@ function RegionSelect({
   const handleKeyDown = useCallback(
     (evt, index) => {
       switch (evt.key) {
-        case ' ':
         case 'SpaceBar':
         case 'Enter':
           evt.preventDefault();
@@ -26,6 +26,42 @@ function RegionSelect({
     [onOptionSelect],
   );
 
+  const handleListKeyDown = useCallback(
+    (evt) => {
+      switch (evt.key) {
+        case 'Escape':
+          evt.preventDefault();
+          onOptionMenuClick(evt);
+          break;
+        case 'ArrowUp':
+          evt.preventDefault();
+          toSwitchOptions(
+            selectedOption - 1 >= 0
+              ? selectedOption - 1
+              : optionsList.length - 1,
+          );
+          break;
+        case 'ArrowDown':
+          evt.preventDefault();
+          toSwitchOptions(
+            selectedOption === optionsList.length - 1 ? 0 : selectedOption + 1,
+          );
+          break;
+        case 'Home':
+          evt.preventDefault();
+          toSwitchOptions(0);
+          break;
+        case 'End':
+          evt.preventDefault();
+          toSwitchOptions(optionsList.length - 1);
+          break;
+        default:
+          break;
+      }
+    },
+    [onOptionMenuClick, toSwitchOptions, optionsList, selectedOption],
+  );
+
   return (
     <div className='region-select'>
       <button
@@ -34,10 +70,11 @@ function RegionSelect({
         }`}
         type='button'
         onClick={onOptionMenuClick}
+        onKeyDown={handleListKeyDown}
         aria-haspopup='listbox'
         aria-expanded={isOptionsOpen}
       >
-        Filter by Region
+        {optionsList[selectedOption]}
       </button>
       <ul
         className={`region-select__list ${
@@ -45,7 +82,9 @@ function RegionSelect({
         } ${isOptionsOpen ? 'region-select__list_open' : ''}`}
         role='listbox'
         aria-activedescendant={optionsList[selectedOption]}
-        tabIndex={-1}
+        aria-labelledby={optionsList[selectedOption]}
+        tabIndex={0}
+        onKeyDown={handleListKeyDown}
       >
         {optionsList.map((option, index) => (
           <li

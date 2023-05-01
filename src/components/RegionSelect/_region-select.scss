@@ -1,21 +1,25 @@
 .region-select {
-  height: 52px;
+  height: 56px;
   z-index: 1;
   &__btn {
     width: 200px;
-    height: 52px;
+    height: 56px;
     padding: 0 0 0 23px;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 5px;
-    background: url('../../images/chevron-down.svg') calc(100% - 18px)
+    outline: none;
+    background: url('../../images/chevron-down.svg') calc(100% - 16px)
         center/15px no-repeat,
       $white;
     @include shadow;
     @include base-text($textS, 300, $textLM);
     text-align: left;
     cursor: pointer;
+    &:focus-visible {
+      border-color: $activeSelect;
+    }
     &_theme_dark {
-      background: url('../../images/chevron-down-filled.svg') calc(100% - 18px)
+      background: url('../../images/chevron-down-filled.svg') calc(100% - 16px)
           center/15px no-repeat,
         $elementsDM;
       color: $white;
@@ -42,15 +46,29 @@
     @include base-text($textS, 300, $textLM);
     cursor: pointer;
     user-select: none;
-    transition: opacity 0.6s;
     &:first-child {
       padding-top: 20px;
+      &:active,
+      &:focus,
+      &:hover,
+      &[aria-selected='true'] {
+        border-radius: 5px 5px 0 0;
+      }
     }
     &:last-child {
       padding-bottom: 17px;
+      &:active,
+      &:focus,
+      &:hover,
+      &[aria-selected='true'] {
+        border-radius: 0 0 5px 5px;
+      }
     }
-    &:hover {
-      opacity: 0.6;
+    &:active,
+    &:focus,
+    &:hover,
+    &[aria-selected='true'] {
+      background-color: $activeSelect;
     }
     &_theme_dark {
       color: $white;
