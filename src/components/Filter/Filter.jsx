@@ -17,7 +17,7 @@ function Filter({
   optionsList,
 }) {
   return (
-    <section className='filter'>
+    <section className='filter' aria-label='Section with search and filters'>
       <div className='filter__wrapper'>
         <Search
           isDarkTheme={isDarkTheme}

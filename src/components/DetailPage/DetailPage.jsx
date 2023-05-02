@@ -96,13 +96,13 @@ function DetailPage({ isDarkTheme, cards }) {
           alt={card.flags.alt || `The flag of ${card.name.common}`}
         />
         <div className='detail-page__description-wrapper'>
-          <h2
+          <h1
             className={`detail-page__country-name ${
               isDarkTheme ? 'detail-page__country-name_theme_dark' : ''
             }`}
           >
             {card.name.common}
-          </h2>
+          </h1>
           <div className='detail-page__list-wrapper'>
             <ul className='detail-page__description-list'>
               <li

@@ -16,15 +16,15 @@
   &__item {
     width: 264px;
     border-radius: 5px;
+    outline: none;
     overflow: hidden;
-    transition: box-shadow 0.6s;
-    &:hover {
-      @include shadow;
-    }
+    @include shadow;
+    transition: opacity 0.6s;
     &_theme_dark {
-      &:hover {
-        @include shadow-light;
-      }
+      @include shadow-light;
+    }
+    &:hover {
+      opacity: 0.8;
     }
   }
   &__item-link {

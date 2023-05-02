@@ -7,7 +7,7 @@ import Card from '../Card/Card.jsx';
 // CARDS COMPONENT
 function Cards({ isDarkTheme, cards, searchResult }) {
   return (
-    <section className='cards'>
+    <section className='cards' aria-label='Section with country cards'>
       <ul className='cards__wrapper'>
         {searchResult
           ? searchResult.map((card, index) => (
