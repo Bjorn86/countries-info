@@ -1,5 +1,16 @@
 import React, { useCallback } from 'react';
 
+// OTHER IMPORTS
+import {
+  ESCAPE_KEY,
+  SPACE_BAR_KEY,
+  ENTER_KEY,
+  ARROW_UP_KEY,
+  ARROW_DOWN_KEY,
+  HOME_KEY,
+  END_KEY,
+} from '../../utils/constants.js';
+
 // REGION SELECT COMPONENT
 function RegionSelect({
   isDarkTheme,
@@ -14,8 +25,8 @@ function RegionSelect({
   const handleKeyDown = useCallback(
     (evt, index) => {
       switch (evt.key) {
-        case 'SpaceBar':
-        case 'Enter':
+        case SPACE_BAR_KEY:
+        case ENTER_KEY:
           evt.preventDefault();
           onOptionSelect(index);
           break;
@@ -29,11 +40,11 @@ function RegionSelect({
   const handleListKeyDown = useCallback(
     (evt) => {
       switch (evt.key) {
-        case 'Escape':
+        case ESCAPE_KEY:
           evt.preventDefault();
           onOptionMenuClick(evt);
           break;
-        case 'ArrowUp':
+        case ARROW_UP_KEY:
           evt.preventDefault();
           toSwitchOptions(
             selectedOption - 1 >= 0
@@ -41,17 +52,17 @@ function RegionSelect({
               : optionsList.length - 1,
           );
           break;
-        case 'ArrowDown':
+        case ARROW_DOWN_KEY:
           evt.preventDefault();
           toSwitchOptions(
             selectedOption === optionsList.length - 1 ? 0 : selectedOption + 1,
           );
           break;
-        case 'Home':
+        case HOME_KEY:
           evt.preventDefault();
           toSwitchOptions(0);
           break;
-        case 'End':
+        case END_KEY:
           evt.preventDefault();
           toSwitchOptions(optionsList.length - 1);
           break;

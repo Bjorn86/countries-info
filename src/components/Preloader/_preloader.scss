@@ -1,0 +1,14 @@
+.preloader {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: url('../../assets/icons/spinner.svg') center center/auto no-repeat,
+    $backgroundLM;
+  &_theme_dark {
+    background: url('../../assets/icons/spinner.svg') center center/auto
+        no-repeat,
+      $backgroundDM;
+  }
+}

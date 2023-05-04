@@ -13,6 +13,16 @@
     justify-items: center;
     list-style: none;
   }
+  &__not-found {
+    width: 40%;
+    margin: 0 auto;
+    padding-top: 80px;
+    @include base-text(32px, 800, $textLM);
+    text-align: center;
+    &_theme_dark {
+      color: $white;
+    }
+  }
   &__item {
     width: 264px;
     border-radius: 5px;

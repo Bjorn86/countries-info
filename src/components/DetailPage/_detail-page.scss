@@ -10,7 +10,7 @@
     border: 1px solid transparent;
     border-radius: 5px;
     outline: none;
-    background: url('../../images/arrow-left-long.svg') 32px center/18px
+    background: url('../../assets/icons/arrow-left-long.svg') 32px center/18px
         no-repeat,
       $white;
     @include shadow;
@@ -24,7 +24,7 @@
       border-color: $activeSelect;
     }
     &_theme_dark {
-      background: url('../../images/arrow-left-long-filled.svg') 32px
+      background: url('../../assets/icons/arrow-left-long-filled.svg') 32px
           center/18px no-repeat,
         $elementsDM;
       color: $white;

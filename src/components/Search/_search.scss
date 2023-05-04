@@ -8,7 +8,7 @@
     border-radius: 5px;
     outline: none;
     @include shadow;
-    background: url('../../images/search.svg') 29px center/20px no-repeat,
+    background: url('../../assets/icons/search.svg') 29px center/20px no-repeat,
       $white;
     @include base-text($textS, 300, $inputLM);
     &[type='search']::-webkit-search-cancel-button {
@@ -22,7 +22,7 @@
       border-color: $activeSelect;
     }
     &_theme_dark {
-      background: url('../../images/search-filled.svg') 30px center/20px
+      background: url('../../assets/icons/search-filled.svg') 30px center/20px
           no-repeat,
         $elementsDM;
       color: $white;

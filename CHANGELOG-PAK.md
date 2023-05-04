@@ -37,6 +37,50 @@ devServer: {
 },
 ```
 
-## Прочие
+## Изменения файловой структуры
 
-Добавить .gitkeep в пустые директории
+- `src/fonts` -> `src/fonts/assets/fonts`
+- `src/images` -> `src/assets/images`
+- `src/vendor/_font.scss` -> `src/components/Common/_font.scss`
+
+## Изменения .prettierignore
+
+```plaintext
+/dist
+/public
+/node_modules
+/src/lib
+**/*.md
+```
+
+## Изменения .gitignore
+
+```plaintext
+# LOGS
+logs
+*.log
+npm-debug.log*
+
+# DEPENDENCY DIRECTORY
+node_modules
+
+# OPTIONAL NPM CACHE DIRECTORY
+.npm
+
+# OPTIONAL REPL HISTORY
+.DS_Store
+.idea
+.vscode
+
+# ENV VARIABLES
+*.env
+
+# OTHER DIRECTORY
+dist
+public
+```
+
+## Прочие изменения
+
+- Добавлена директория `src/assets/icons` для хранения иконок проекта. Также добавлена директория `src/assets/icons/favicons/` для хранения альтернативных favicon.
+- Добавить `.gitkeep` в пустые директории

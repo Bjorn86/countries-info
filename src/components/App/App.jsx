@@ -1,16 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 // IMPORT COMPONENTS
 import PageContent from '../PageContent/PageContent.jsx';
 import DetailPage from '../DetailPage/DetailPage.jsx';
 import Cards from '../Cards/Cards.jsx';
+import Preloader from '../Preloader/Preloader.jsx';
 
 // IMPORT API
 import * as api from '../../utils/api.js';
 
 // OTHER IMPORTS
-import { optionsList } from '../../utils/constants.js';
+import { optionsList, ESCAPE_KEY } from '../../utils/constants.js';
 
 // APP CORE COMPONENT
 function App() {
@@ -21,6 +23,7 @@ function App() {
   const [isOptionsOpen, setOptionsClass] = useState(false);
   const [selectedOption, setSelectedOption] = useState(0);
   const [filterAndSearchResult, setFilterAndSearchResult] = useState(null);
+  const [isPreloaderActive, setPreloaderClass] = useState(true);
 
   // GET CONTENT FROM THE SERVER
   const getContent = async () => {
@@ -29,8 +32,20 @@ function App() {
       setCards(cardData);
     } catch (err) {
       console.error(err);
+    } finally {
+      setPreloaderClass(false);
     }
   };
+
+  // READ AND SAVE THEME
+  const readAndSaveTheme = useCallback(() => {
+    const theme = localStorage.getItem('isDarkTheme');
+    if (JSON.parse(theme)) {
+      setDarkThemeClass(theme);
+    } else {
+      localStorage.setItem('isDarkTheme', isDarkTheme);
+    }
+  }, [isDarkTheme]);
 
   // HANDLE SEARCH AND FILTER RESULT
   const handleSearchResult = useCallback(
@@ -66,16 +81,6 @@ function App() {
     [selectedOption, searchTerm],
   );
 
-  // SET CARDS STATE WHEN MOUNTING
-  useEffect(() => {
-    getContent();
-  }, []);
-
-  // SET FOUND CARDS STATE WHEN MOUNTING
-  useEffect(() => {
-    handleSearchResult(cards);
-  }, [cards, handleSearchResult]);
-
   // HANDLE SEARCH CHANGE
   const handleSearchChange = useCallback((input) => {
     setSearchTerm(input);
@@ -84,12 +89,13 @@ function App() {
   // TOGGLE THEME
   const switchTheme = useCallback(() => {
     setDarkThemeClass(!isDarkTheme);
+    localStorage.setItem('isDarkTheme', !isDarkTheme);
   }, [isDarkTheme]);
 
   // TOGGLE OPEN\CLOSE MENU OPTIONS
   const toggleOptionMenu = useCallback(
     (evt) => {
-      if (evt.key === 'Escape') {
+      if (evt.key === ESCAPE_KEY) {
         setOptionsClass(false);
       } else {
         setOptionsClass(!isOptionsOpen);
@@ -109,9 +115,38 @@ function App() {
     setOptionsClass(false);
   }, []);
 
+  // SET CARDS STATE WHEN MOUNTING
+  useEffect(() => {
+    getContent();
+  }, []);
+
+  // SET FOUND CARDS STATE WHEN MOUNTING
+  useEffect(() => {
+    handleSearchResult(cards);
+  }, [cards, handleSearchResult]);
+
+  // SET THEME
+  useEffect(() => {
+    readAndSaveTheme();
+  }, [readAndSaveTheme]);
+
+  // PRELOADER RENDER
+  if (isPreloaderActive) {
+    return <Preloader isDarkTheme={isDarkTheme} />;
+  }
+
+  // RENDER
   return (
     cards && (
       <div className='app__content'>
+        <Helmet>
+          <meta name='description' content='Countries Info App' />
+          <meta
+            name='keywords'
+            content='countries, information, capital, currency, language, population, guide'
+          />
+          <title>Countries Info</title>
+        </Helmet>
         <Routes>
           <Route
             path='/*'
@@ -154,9 +189,3 @@ function App() {
 export default App;
 
 /* TODO Адаптив */
-/* TODO Установить React Helmet для управление заголовком и описанием детальной страницы */
-/* TODO Новая файловая структура */
-/* TODO Сделать заглушку если поиск не дал результатов */
-/* TODO Определение темы браузера и хранение выбранной темы в localstorage */
-/* TODO Проверить обводку ссылки на главную на детальной странице */
-/* TODO При открытии карточки в новой вкладке сбрасывается тема */

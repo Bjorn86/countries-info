@@ -1,6 +1,7 @@
 .page-content {
   max-width: 100%;
   background-color: $backgroundLM;
+  flex: 1 1 auto;
   &_theme_dark {
     background-color: $backgroundDM;
   }

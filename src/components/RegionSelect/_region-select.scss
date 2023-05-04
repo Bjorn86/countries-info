@@ -8,7 +8,7 @@
     border: 1px solid transparent;
     border-radius: 5px;
     outline: none;
-    background: url('../../images/chevron-down.svg') calc(100% - 16px)
+    background: url('../../assets/icons/chevron-down.svg') calc(100% - 16px)
         center/15px no-repeat,
       $white;
     @include shadow;
@@ -19,8 +19,8 @@
       border-color: $activeSelect;
     }
     &_theme_dark {
-      background: url('../../images/chevron-down-filled.svg') calc(100% - 16px)
-          center/15px no-repeat,
+      background: url('../../assets/icons/chevron-down-filled.svg')
+          calc(100% - 16px) center/15px no-repeat,
         $elementsDM;
       color: $white;
     }

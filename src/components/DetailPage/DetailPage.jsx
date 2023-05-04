@@ -1,5 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+
+// IMPORT COMPONENTS
+import NotFound from '../NotFound/NotFound.jsx';
+import Preloader from '../Preloader/Preloader.jsx';
 
 // DETAIL PAGE COMPONENT
 function DetailPage({ isDarkTheme, cards }) {
@@ -7,14 +12,21 @@ function DetailPage({ isDarkTheme, cards }) {
   const { countryCode } = useParams();
   const navigate = useNavigate();
   const [card, setCard] = useState(null);
+  const [isPreloaderActive, setPreloaderClass] = useState(true);
 
   // SET CARD STATE WHEN MOUNTING
   useEffect(() => {
+    setCard(null);
     const findCard = cards.find(
       (card) => card.cca3 === countryCode.toUpperCase(),
     );
-    setCard(findCard);
-  }, [cards, countryCode]);
+    if (!findCard) {
+      setPreloaderClass(false);
+    } else {
+      setCard(findCard);
+      setPreloaderClass(false);
+    }
+  }, [cards, countryCode, setPreloaderClass]);
 
   // HANDLE LANGUAGES RENDER
   const handleLanguages = useCallback((card) => {
@@ -74,16 +86,42 @@ function DetailPage({ isDarkTheme, cards }) {
     [isDarkTheme],
   );
 
-  /* TODO Возвращать 404 страницу */
-  if (!card) return null;
+  // HANDLE BUTTON BACK CLICK
+  const handleBtnBackClick = useCallback(() => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate('/', { replace: true });
+    }
+  }, [navigate]);
+
+  // PRELOADER AND NOT FOUND RENDER
+  if (isPreloaderActive) {
+    return <Preloader isDarkTheme={isDarkTheme} />;
+  } else if (!card && !isPreloaderActive) {
+    return <NotFound isDarkTheme={isDarkTheme} />;
+  }
+
+  // RENDER
   return (
     <section className='detail-page'>
+      <Helmet>
+        <meta
+          name='description'
+          content={`${card.name.common} - country information`}
+        />
+        <meta
+          name='keywords'
+          content={`${card.name.common}, information, capital, currency, language, population, guide`}
+        />
+        <title>{`Countries Info - ${card.name.common}`}</title>
+      </Helmet>
       <button
         className={`detail-page__btn-back ${
           isDarkTheme ? 'detail-page__btn-back_theme_dark' : ''
         }`}
         type='button'
-        onClick={() => navigate(-1)}
+        onClick={handleBtnBackClick}
       >
         Back
       </button>

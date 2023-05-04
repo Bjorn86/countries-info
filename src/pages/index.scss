@@ -1,6 +1,8 @@
 /* VENDOR IMPORTS */
-@import url('../vendor/normalize.css');
-@import url('../vendor/_font.scss');
+@import url('../lib/normalize.css');
+
+/* COMMON */
+@import url('../components/Common/_font.scss');
 
 /* COMPONENTS */
 @import url('../components/App/_app.scss');
@@ -12,3 +14,5 @@
 @import url('../components/Cards/_cards.scss');
 @import url('../components/Card/_card.scss');
 @import url('../components/DetailPage/_detail-page.scss');
+@import url('../components/Preloader/_preloader.scss');
+@import url('../components/NotFound/_not-found.scss');
