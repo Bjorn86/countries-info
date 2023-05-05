@@ -100,8 +100,8 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               additionalData: `
-                @import "src/components/Common/_mixins.scss";
-                @import "src/components/Common/_variables.scss";
+                @import "src/components/Common/Mixins.scss";
+                @import "src/components/Common/Variables.scss";
               `,
             },
           },

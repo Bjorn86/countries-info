@@ -1,6 +1,8 @@
 .card {
   display: flex;
   flex-direction: column;
+  border-radius: 5px;
+  overflow: hidden;
   &__country-flag {
     width: 100%;
     height: 160px;
@@ -19,7 +21,7 @@
   }
   &__country-name {
     margin: 0 0 18px;
-    @include base-text(18px, 800, $textLM);
+    @include base-text($textL, 800, $textLM);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

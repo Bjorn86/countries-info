@@ -142,7 +142,7 @@ function DetailPage({ isDarkTheme, cards }) {
             {card.name.common}
           </h1>
           <div className='detail-page__list-wrapper'>
-            <ul className='detail-page__description-list'>
+            <ul className='detail-page__description-list detail-page__description-list_position_left'>
               <li
                 className={`detail-page__description-info ${
                   isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
@@ -225,7 +225,7 @@ function DetailPage({ isDarkTheme, cards }) {
                 {card.capital.join(', ') || 'the country has no capital'}
               </li>
             </ul>
-            <ul className='detail-page__description-list'>
+            <ul className='detail-page__description-list detail-page__description-list_position_bottom'>
               <li
                 className={`detail-page__description-info ${
                   isDarkTheme ? 'detail-page__description-info_theme_dark' : ''

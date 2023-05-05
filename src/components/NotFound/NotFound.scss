@@ -8,7 +8,7 @@
   padding: 80px 80px;
   &__title {
     margin: 0;
-    @include base-text(32px, 800, $textLM);
+    @include base-text($textXXL, 800, $textLM);
     &_theme_dark {
       color: $white;
     }
@@ -35,6 +35,31 @@
     }
     &_theme_dark {
       color: $white;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .not-found {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .not-found {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 50px;
+    &__title {
+      font-size: $textXL;
+    }
+    &__description {
+      padding-top: 20px;
+      font-size: $textS;
+    }
+    &__link {
+      font-size: $textS;
     }
   }
 }

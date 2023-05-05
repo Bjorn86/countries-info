@@ -36,9 +36,11 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 25px;
   }
   &__flag {
-    width: 560px;
+    max-width: 560px;
+    min-width: 465px;
     object-fit: contain;
     @include base-text($textM, 600, $textLM);
     &_theme_dark {
@@ -46,14 +48,15 @@
     }
   }
   &__description-wrapper {
-    min-width: 600px;
+    max-width: 600px;
+    min-width: 450px;
     display: flex;
     flex-direction: column;
   }
   &__country-name {
     margin: 0;
     padding-top: 42px;
-    @include base-text(32px, 800, $textLM);
+    @include base-text($textXXL, 800, $textLM);
     &_theme_dark {
       color: $white;
     }
@@ -71,6 +74,9 @@
     margin: 0;
     padding-left: 0;
     list-style: none;
+    &_position_left {
+      padding-right: 10px;
+    }
   }
   &__description-info {
     padding-bottom: 13px;
@@ -96,6 +102,7 @@
     gap: 10px;
   }
   &__border-info {
+    min-width: 131px;
     margin: 0;
     @include base-text($textM, 600, $textLM);
     &_theme_dark {
@@ -129,6 +136,91 @@
     &_theme_dark {
       background: $elementsDM;
       color: $white;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .detail-page {
+    &__wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+    &__flag {
+      max-width: 65%;
+      min-width: 273px;
+    }
+    &__description-wrapper {
+      max-width: 100%;
+      min-width: 273px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .detail-page {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 40px;
+    &__wrapper {
+      padding-top: 64px;
+    }
+    &__country-name {
+      padding-top: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .detail-page {
+    padding-left: 28px;
+    padding-right: 28px;
+    &__btn-back {
+      height: 32px;
+      width: 104px;
+      padding-left: 25px;
+      background: url('../../assets/icons/arrow-left-long.svg') 24px center/16px
+          no-repeat,
+        $white;
+      font-size: $textS;
+      &_theme_dark {
+        background: url('../../assets/icons/arrow-left-long-filled.svg') 24px
+            center/16px no-repeat,
+          $elementsDM;
+      }
+    }
+    &__country-name {
+      font-size: $textXL;
+    }
+    &__list-wrapper {
+      padding-top: 25px;
+      flex-direction: column;
+    }
+    &__description-list {
+      width: 100%;
+      &_position_left {
+        padding-right: 0;
+      }
+      &_position_bottom {
+        padding-top: 34px;
+      }
+    }
+    &__description-info {
+      padding-bottom: 15px;
+      font-size: $textS;
+    }
+    &__description-info-accent {
+      font-size: $textS;
+    }
+    &__border-wrapper {
+      padding-top: 27px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    &__link-country {
+      padding: 7px 10px;
+      font-size: $textXS;
     }
   }
 }

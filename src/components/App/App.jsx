@@ -188,4 +188,4 @@ function App() {
 
 export default App;
 
-/* TODO Адаптив */
+/* TODO Документация и тест в Firefox */
