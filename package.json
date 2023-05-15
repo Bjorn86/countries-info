@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/Bjorn86/countries-info/issues"
   },
-  "homepage": "https://github.com/Bjorn86/app-webpack-react#readme",
+  "homepage": "https://bjorn86.github.io/countries-info/",
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
