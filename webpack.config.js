@@ -36,7 +36,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: `./static/js/${filename('js')}`,
-    publicPath: '/',
   },
   optimization: optimization(),
   devtool: isDev ? 'source-map' : false,
@@ -63,6 +62,10 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'src/favicon.ico'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+        {
+          from: path.resolve(__dirname, 'src/favicon.svg'),
           to: path.resolve(__dirname, 'dist'),
         },
       ],
