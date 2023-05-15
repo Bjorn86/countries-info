@@ -187,5 +187,3 @@ function App() {
 }
 
 export default App;
-
-/* TODO Документация и тест в Firefox */
