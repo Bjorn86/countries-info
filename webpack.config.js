@@ -24,7 +24,8 @@ const optimization = () => {
 };
 
 // FILE NAME VARIANTS FUNCTION
-const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
+const filename = (ext) =>
+  isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -141,14 +142,14 @@ module.exports = {
         test: /\.(png|jpe?g|svg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name].[hash][ext]',
+          filename: 'images/[name].[contenthash][ext]',
         },
       },
       {
         test: /\.(woff(2)?|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name].[hash][ext]',
+          filename: 'fonts/[name].[contenthash][ext]',
         },
       },
       {
