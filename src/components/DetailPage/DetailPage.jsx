@@ -1,10 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+// IMPORT PACKAGES
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+
+// IMPORT STYLES
+import './DetailPage.scss';
 
 // IMPORT COMPONENTS
-import NotFound from '../NotFound/NotFound.jsx';
-import Preloader from '../Preloader/Preloader.jsx';
+import NotFound from '../NotFound/NotFound';
+import Preloader from '../Preloader/Preloader';
 
 // DETAIL PAGE COMPONENT
 function DetailPage({ isDarkTheme, cards }) {
@@ -18,7 +24,7 @@ function DetailPage({ isDarkTheme, cards }) {
   useEffect(() => {
     setCard(null);
     const findCard = cards.find(
-      (card) => card.cca3 === countryCode.toUpperCase(),
+      (item) => item.cca3 === countryCode.toUpperCase(),
     );
     if (!findCard) {
       setPreloaderClass(false);
@@ -29,20 +35,18 @@ function DetailPage({ isDarkTheme, cards }) {
   }, [cards, countryCode, setPreloaderClass]);
 
   // HANDLE LANGUAGES RENDER
-  const handleLanguages = useCallback((card) => {
-    return (
-      Object.values(card.languages).join(', ') ||
-      'the country does not have an official language'
-    );
-  }, []);
+  const handleLanguages = useCallback(
+    (item) =>
+      Object.values(item.languages).join(', ') ||
+      'the country does not have an official language',
+    [],
+  );
 
   // HANDLE CURRENCIES RENDER
-  const handleCurrencies = useCallback((card) => {
-    let currenciesArr = [];
-    for (let key in card.currencies) {
-      let currency = card.currencies[key];
-      currenciesArr.push(currency.name);
-    }
+  const handleCurrencies = useCallback((item) => {
+    const currenciesArr = Object.values(item.currencies).map(
+      (currency) => currency.name,
+    );
     return (
       currenciesArr.join(', ') ||
       'the country does not have an official currency'
@@ -51,9 +55,9 @@ function DetailPage({ isDarkTheme, cards }) {
 
   // HANDLE BORDER COUNTRIES LINKS RENDER
   const handleBorderCountriesButtons = useCallback(
-    (card, cards) => {
-      let borders = card.borders;
-      let nameCountries = [];
+    () => {
+      const { borders } = card;
+      const nameCountries = [];
       borders.forEach((inputCode) => {
         cards.forEach((cardItem) => {
           if (inputCode === cardItem.cca3) {
@@ -65,7 +69,7 @@ function DetailPage({ isDarkTheme, cards }) {
         nameCountries.map((country, index) => (
           <Link
             to={`/${borders[index].toLowerCase()}`}
-            key={index}
+            key={uuidv4()}
             className={`detail-page__link-country ${
               isDarkTheme ? 'detail-page__link-country_theme_dark' : ''
             }`}
@@ -83,6 +87,7 @@ function DetailPage({ isDarkTheme, cards }) {
         </p>
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isDarkTheme],
   );
 
@@ -98,7 +103,8 @@ function DetailPage({ isDarkTheme, cards }) {
   // PRELOADER AND NOT FOUND RENDER
   if (isPreloaderActive) {
     return <Preloader isDarkTheme={isDarkTheme} />;
-  } else if (!card && !isPreloaderActive) {
+  }
+  if (!card && !isPreloaderActive) {
     return <NotFound isDarkTheme={isDarkTheme} />;
   }
 
@@ -286,7 +292,7 @@ function DetailPage({ isDarkTheme, cards }) {
                 Border Countries:
               </p>
               <div className='detail-page__border-link-wrapper'>
-                {handleBorderCountriesButtons(card, cards)}
+                {handleBorderCountriesButtons()}
               </div>
             </div>
           )}
@@ -297,3 +303,8 @@ function DetailPage({ isDarkTheme, cards }) {
 }
 
 export default DetailPage;
+
+DetailPage.propTypes = {
+  cards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  isDarkTheme: PropTypes.bool.isRequired,
+};

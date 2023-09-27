@@ -1,4 +1,8 @@
-import React from 'react';
+// IMPORT PACKAGES
+import PropTypes from 'prop-types';
+
+// IMPORT STYLES
+import './Search.scss';
 
 // SEARCH COMPONENT
 function Search({ isDarkTheme, onSearchChange, searchTerm }) {
@@ -13,9 +17,6 @@ function Search({ isDarkTheme, onSearchChange, searchTerm }) {
         name='search'
         aria-label='Search for a country'
         autoComplete='off'
-        autoCorrect='off'
-        autoCapitalize='off'
-        spellCheck='false'
         placeholder='Search for a country...'
         value={searchTerm}
         onChange={(evt) => onSearchChange(evt.target.value)}
@@ -25,3 +26,9 @@ function Search({ isDarkTheme, onSearchChange, searchTerm }) {
 }
 
 export default Search;
+
+Search.propTypes = {
+  isDarkTheme: PropTypes.bool.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string.isRequired,
+};

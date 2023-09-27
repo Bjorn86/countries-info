@@ -24,8 +24,7 @@ const optimization = () => {
 };
 
 // FILE NAME VARIANTS FUNCTION
-const filename = (ext) =>
-  isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -112,13 +111,10 @@ module.exports = {
         ],
       },
       {
-        test: /\.m?js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
         },
       },
       {
@@ -126,33 +122,20 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-typescript'],
-          },
-        },
-      },
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
         },
       },
       {
         test: /\.(png|jpe?g|svg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name].[contenthash][ext]',
+          filename: 'images/[name].[hash][ext]',
         },
       },
       {
         test: /\.(woff(2)?|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name].[contenthash][ext]',
+          filename: 'fonts/[name].[hash][ext]',
         },
       },
       {
@@ -164,5 +147,8 @@ module.exports = {
         use: ['csv-loader'],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
 };

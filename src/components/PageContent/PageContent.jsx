@@ -1,9 +1,13 @@
-import React from 'react';
+// IMPORT PACKAGES
 import { Outlet, Route, Routes } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+// IMPORT STYLES
+import './PageContent.scss';
 
 // IMPORT COMPONENTS
-import Header from '../Header/Header.jsx';
-import Filter from '../Filter/Filter.jsx';
+import Header from '../Header/Header';
+import Filter from '../Filter/Filter';
 
 // APP LAYOUT COMPONENT
 function PageContent({
@@ -54,3 +58,16 @@ function PageContent({
 }
 
 export default PageContent;
+
+PageContent.propTypes = {
+  isDarkTheme: PropTypes.bool.isRequired,
+  onThemeSwitchClick: PropTypes.func.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string.isRequired,
+  isOptionsOpen: PropTypes.bool.isRequired,
+  onOptionMenuClick: PropTypes.func.isRequired,
+  onOptionSelect: PropTypes.func.isRequired,
+  toSwitchOptions: PropTypes.func.isRequired,
+  selectedOption: PropTypes.number.isRequired,
+  optionsList: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

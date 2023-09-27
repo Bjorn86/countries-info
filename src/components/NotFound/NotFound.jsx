@@ -1,5 +1,9 @@
-import React from 'react';
+// IMPORT PACKAGES
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+// IMPORT STYLES
+import './NotFound.scss';
 
 // NOT FOUND COMPONENT
 function NotFound({ isDarkTheme }) {
@@ -20,7 +24,7 @@ function NotFound({ isDarkTheme }) {
         Sorry, the page you are looking for could not be found.
       </p>
       <Link
-        to={'/'}
+        to='/'
         className={`not-found__link ${
           isDarkTheme ? 'not-found__link_theme_dark' : ''
         }`}
@@ -32,3 +36,7 @@ function NotFound({ isDarkTheme }) {
 }
 
 export default NotFound;
+
+NotFound.propTypes = {
+  isDarkTheme: PropTypes.bool.isRequired,
+};

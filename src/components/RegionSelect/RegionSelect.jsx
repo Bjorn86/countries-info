@@ -1,4 +1,10 @@
-import React, { useCallback } from 'react';
+// IMPORT PACKAGES
+import { useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+
+// IMPORT STYLES
+import './RegionSelect.scss';
 
 // OTHER IMPORTS
 import {
@@ -9,7 +15,7 @@ import {
   ARROW_DOWN_KEY,
   HOME_KEY,
   END_KEY,
-} from '../../utils/constants.js';
+} from '../../utils/constants';
 
 // REGION SELECT COMPONENT
 function RegionSelect({
@@ -103,7 +109,7 @@ function RegionSelect({
               isDarkTheme ? 'region-select__item_theme_dark' : ''
             }`}
             id={option}
-            key={index}
+            key={uuidv4()}
             role='option'
             aria-selected={selectedOption === index}
             tabIndex={0}
@@ -121,3 +127,13 @@ function RegionSelect({
 }
 
 export default RegionSelect;
+
+RegionSelect.propTypes = {
+  isDarkTheme: PropTypes.bool.isRequired,
+  isOptionsOpen: PropTypes.bool.isRequired,
+  onOptionMenuClick: PropTypes.func.isRequired,
+  onOptionSelect: PropTypes.func.isRequired,
+  toSwitchOptions: PropTypes.func.isRequired,
+  selectedOption: PropTypes.number.isRequired,
+  optionsList: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

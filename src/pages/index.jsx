@@ -5,7 +5,7 @@ import { HashRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 // IMPORT COMPONENTS
-import App from '../components/App/App.jsx';
+import App from '../components/App/App';
 
 // IMPORT STYLES
 import './index.scss';

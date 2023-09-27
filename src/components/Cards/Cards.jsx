@@ -1,8 +1,12 @@
-import React from 'react';
+// IMPORT PACKAGES
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+// IMPORT STYLES
+import './Cards.scss';
 
 // COMPONENTS IMPORT
-import Card from '../Card/Card.jsx';
+import Card from '../Card/Card';
 
 // CARDS COMPONENT
 function Cards({ isDarkTheme, cards, searchResult }) {
@@ -19,12 +23,12 @@ function Cards({ isDarkTheme, cards, searchResult }) {
       ) : (
         <ul className='cards__wrapper'>
           {searchResult
-            ? searchResult.map((card, index) => (
+            ? searchResult.map((card) => (
                 <li
                   className={`cards__item ${
                     isDarkTheme ? 'cards__item_theme_dark' : ''
                   }`}
-                  key={index}
+                  key={card.ccn3}
                 >
                   <Link
                     to={card.cca3.toLowerCase()}
@@ -34,12 +38,12 @@ function Cards({ isDarkTheme, cards, searchResult }) {
                   </Link>
                 </li>
               ))
-            : cards.map((card, index) => (
+            : cards.map((card) => (
                 <li
                   className={`cards__item ${
                     isDarkTheme ? 'cards__item_theme_dark' : ''
                   }`}
-                  key={index}
+                  key={card.ccn3}
                 >
                   <Link
                     to={card.cca3.toLowerCase()}
@@ -56,3 +60,13 @@ function Cards({ isDarkTheme, cards, searchResult }) {
 }
 
 export default Cards;
+
+Cards.propTypes = {
+  isDarkTheme: PropTypes.bool.isRequired,
+  cards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  searchResult: PropTypes.aarrayOf(PropTypes.shape({})),
+};
+
+Cards.defaultProps = {
+  searchResult: null,
+};

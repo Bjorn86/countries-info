@@ -1,4 +1,8 @@
-import React from 'react';
+// IMPORT PACKAGES
+import PropTypes from 'prop-types';
+
+// IMPORT STYLES
+import './Card.scss';
 
 // CARD COMPONENT
 function Card({ card, isDarkTheme }) {
@@ -73,3 +77,19 @@ function Card({ card, isDarkTheme }) {
 }
 
 export default Card;
+
+Card.propTypes = {
+  card: PropTypes.shape({
+    name: PropTypes.shape({
+      common: PropTypes.string.isRequired,
+    }).isRequired,
+    flags: PropTypes.shape({
+      svg: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+    }).isRequired,
+    population: PropTypes.number.isRequired,
+    region: PropTypes.string.isRequired,
+    capital: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  isDarkTheme: PropTypes.bool.isRequired,
+};

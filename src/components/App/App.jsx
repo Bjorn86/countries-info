@@ -1,18 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
+// IMPORT STYLES
+import './App.scss';
+
 // IMPORT COMPONENTS
-import PageContent from '../PageContent/PageContent.jsx';
-import DetailPage from '../DetailPage/DetailPage.jsx';
-import Cards from '../Cards/Cards.jsx';
-import Preloader from '../Preloader/Preloader.jsx';
+import PageContent from '../PageContent/PageContent';
+import DetailPage from '../DetailPage/DetailPage';
+import Cards from '../Cards/Cards';
+import Preloader from '../Preloader/Preloader';
 
 // IMPORT API
-import * as api from '../../utils/api.js';
+import * as api from '../../utils/api';
 
 // OTHER IMPORTS
-import { optionsList, ESCAPE_KEY } from '../../utils/constants.js';
+import { optionsList, ESCAPE_KEY } from '../../utils/constants';
 
 // APP CORE COMPONENT
 function App() {
@@ -49,29 +52,25 @@ function App() {
 
   // HANDLE SEARCH AND FILTER RESULT
   const handleSearchResult = useCallback(
-    (cards) => {
-      if (cards) {
+    (cardsData) => {
+      if (cardsData) {
         if (!selectedOption && searchTerm) {
-          const result = cards.filter((card) => {
-            return card.name.common
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase());
-          });
+          const result = cardsData.filter((card) =>
+            card.name.common.toLowerCase().includes(searchTerm.toLowerCase()),
+          );
           setFilterAndSearchResult(result);
         } else if (selectedOption && searchTerm) {
-          const filtered = cards.filter((card) => {
-            return card.region === optionsList[selectedOption];
-          });
-          const result = filtered.filter((card) => {
-            return card.name.common
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase());
-          });
+          const filtered = cardsData.filter(
+            (card) => card.region === optionsList[selectedOption],
+          );
+          const result = filtered.filter((card) =>
+            card.name.common.toLowerCase().includes(searchTerm.toLowerCase()),
+          );
           setFilterAndSearchResult(result);
         } else if (selectedOption && !searchTerm) {
-          const result = cards.filter((card) => {
-            return card.region === optionsList[selectedOption];
-          });
+          const result = cardsData.filter(
+            (card) => card.region === optionsList[selectedOption],
+          );
           setFilterAndSearchResult(result);
         } else {
           setFilterAndSearchResult(null);

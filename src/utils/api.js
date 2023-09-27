@@ -4,9 +4,9 @@ const FIELDS =
 
 // GET CARDS DATA CONTENT FROM THE SERVER
 export function getContent() {
-  return fetch(`${BASE_URL}/all${FIELDS}`).then((res) => {
-    return res.ok
+  return fetch(`${BASE_URL}/all${FIELDS}`).then((res) =>
+    res.ok
       ? res.json()
-      : Promise.reject(`Error: ${res.status} ${res.statusText}`);
-  });
+      : Promise.reject(new Error(`Error: ${res.status} ${res.statusText}`)),
+  );
 }

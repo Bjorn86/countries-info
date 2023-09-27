@@ -1,7 +1,11 @@
-// HEADER COMPONENT
-import React from 'react';
+// IMPORT PACKAGES
 import { Link, Route, Routes } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+// IMPORT STYLES
+import './Header.scss';
+
+// HEADER COMPONENT
 function Header({ isDarkTheme, onThemeSwitchClick }) {
   return (
     <header className={`header ${isDarkTheme ? 'header_theme_dark' : ''}`}>
@@ -22,7 +26,7 @@ function Header({ isDarkTheme, onThemeSwitchClick }) {
           <Route
             path=':countryCode'
             element={
-              <Link to={'/'} className='header__link'>
+              <Link to='/' className='header__link'>
                 <h2
                   className={`header__title ${
                     isDarkTheme ? 'header__title_theme_dark' : ''
@@ -49,3 +53,8 @@ function Header({ isDarkTheme, onThemeSwitchClick }) {
 }
 
 export default Header;
+
+Header.propTypes = {
+  isDarkTheme: PropTypes.bool.isRequired,
+  onThemeSwitchClick: PropTypes.func.isRequired,
+};
