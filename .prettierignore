@@ -1,4 +1,2 @@
-/dist
-/public
-/node_modules
-/src/lib
+# production
+/dist/**/*

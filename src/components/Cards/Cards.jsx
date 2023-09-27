@@ -1,6 +1,7 @@
 // IMPORT PACKAGES
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 // IMPORT STYLES
 import './Cards.scss';
@@ -28,7 +29,7 @@ function Cards({ isDarkTheme, cards, searchResult }) {
                   className={`cards__item ${
                     isDarkTheme ? 'cards__item_theme_dark' : ''
                   }`}
-                  key={card.ccn3}
+                  key={uuidv4()}
                 >
                   <Link
                     to={card.cca3.toLowerCase()}
@@ -43,7 +44,7 @@ function Cards({ isDarkTheme, cards, searchResult }) {
                   className={`cards__item ${
                     isDarkTheme ? 'cards__item_theme_dark' : ''
                   }`}
-                  key={card.ccn3}
+                  key={uuidv4()}
                 >
                   <Link
                     to={card.cca3.toLowerCase()}
@@ -64,7 +65,7 @@ export default Cards;
 Cards.propTypes = {
   isDarkTheme: PropTypes.bool.isRequired,
   cards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  searchResult: PropTypes.aarrayOf(PropTypes.shape({})),
+  searchResult: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 Cards.defaultProps = {
