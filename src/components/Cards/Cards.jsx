@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import clsx from 'clsx';
 
 // IMPORT STYLES
 import './Cards.scss';
@@ -15,9 +16,9 @@ function Cards({ isDarkTheme, cards, searchResult }) {
     <section className='cards' aria-label='Section with country cards'>
       {searchResult && searchResult.length === 0 ? (
         <p
-          className={`cards__not-found ${
-            isDarkTheme ? 'cards__not-found_theme_dark' : ''
-          }`}
+          className={clsx('cards__not-found', {
+            'cards__not-found_theme_dark': isDarkTheme,
+          })}
         >
           The search yielded no results. Please change the search query.
         </p>
@@ -26,9 +27,9 @@ function Cards({ isDarkTheme, cards, searchResult }) {
           {searchResult
             ? searchResult.map((card) => (
                 <li
-                  className={`cards__item ${
-                    isDarkTheme ? 'cards__item_theme_dark' : ''
-                  }`}
+                  className={clsx('cards__item', {
+                    cards__item_theme_dark: isDarkTheme,
+                  })}
                   key={uuidv4()}
                 >
                   <Link
@@ -41,9 +42,9 @@ function Cards({ isDarkTheme, cards, searchResult }) {
               ))
             : cards.map((card) => (
                 <li
-                  className={`cards__item ${
-                    isDarkTheme ? 'cards__item_theme_dark' : ''
-                  }`}
+                  className={clsx('cards__item', {
+                    cards__item_theme_dark: isDarkTheme,
+                  })}
                   key={uuidv4()}
                 >
                   <Link

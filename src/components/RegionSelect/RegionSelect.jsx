@@ -1,7 +1,7 @@
 // IMPORT PACKAGES
-import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import clsx from 'clsx';
 
 // IMPORT STYLES
 import './RegionSelect.scss';
@@ -28,63 +28,51 @@ function RegionSelect({
   optionsList,
 }) {
   // HANDLE KEY NAVIGATION
-  const handleKeyDown = useCallback(
-    (evt, index) => {
-      switch (evt.key) {
-        case SPACE_BAR_KEY:
-        case ENTER_KEY:
-          evt.preventDefault();
-          onOptionSelect(index);
-          break;
-        default:
-          break;
-      }
-    },
-    [onOptionSelect],
-  );
+  const handleKeyDown = (evt, index) => {
+    switch (evt.key) {
+      case SPACE_BAR_KEY:
+      case ENTER_KEY:
+        evt.preventDefault();
+        onOptionSelect(index);
+        break;
+      default:
+        break;
+    }
+  };
 
-  const handleListKeyDown = useCallback(
-    (evt) => {
-      switch (evt.key) {
-        case ESCAPE_KEY:
-          evt.preventDefault();
-          onOptionMenuClick(evt);
-          break;
-        case ARROW_UP_KEY:
-          evt.preventDefault();
-          toSwitchOptions(
-            selectedOption - 1 >= 0
-              ? selectedOption - 1
-              : optionsList.length - 1,
-          );
-          break;
-        case ARROW_DOWN_KEY:
-          evt.preventDefault();
-          toSwitchOptions(
-            selectedOption === optionsList.length - 1 ? 0 : selectedOption + 1,
-          );
-          break;
-        case HOME_KEY:
-          evt.preventDefault();
-          toSwitchOptions(0);
-          break;
-        case END_KEY:
-          evt.preventDefault();
-          toSwitchOptions(optionsList.length - 1);
-          break;
-        default:
-          break;
-      }
-    },
-    [onOptionMenuClick, toSwitchOptions, optionsList, selectedOption],
-  );
+  const handleListKeyDown = (evt) => {
+    evt.preventDefault();
+    switch (evt.key) {
+      case ESCAPE_KEY:
+        onOptionMenuClick(evt);
+        break;
+      case ARROW_UP_KEY:
+        toSwitchOptions(
+          selectedOption - 1 >= 0 ? selectedOption - 1 : optionsList.length - 1,
+        );
+        break;
+      case ARROW_DOWN_KEY:
+        toSwitchOptions(
+          selectedOption === optionsList.length - 1 ? 0 : selectedOption + 1,
+        );
+        break;
+      case HOME_KEY:
+        toSwitchOptions(0);
+        break;
+      case END_KEY:
+        toSwitchOptions(optionsList.length - 1);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className='region-select'>
       <button
-        className={`region-select__btn ${
-          isDarkTheme ? 'region-select__btn_theme_dark' : ''
-        }`}
+        className={clsx('region-select__btn', {
+          'region-select__btn_theme_dark': isDarkTheme,
+        })}
         type='button'
         onClick={onOptionMenuClick}
         onKeyDown={handleListKeyDown}
@@ -94,9 +82,13 @@ function RegionSelect({
         {optionsList[selectedOption]}
       </button>
       <ul
-        className={`region-select__list ${
-          isDarkTheme ? 'region-select__list_theme_dark' : ''
-        } ${isOptionsOpen ? 'region-select__list_open' : ''}`}
+        className={clsx(
+          'region-select__list',
+          {
+            'region-select__list_theme_dark': isDarkTheme,
+          },
+          { 'region-select__list_open': isOptionsOpen },
+        )}
         role='listbox'
         aria-activedescendant={optionsList[selectedOption]}
         aria-labelledby={optionsList[selectedOption]}
@@ -105,9 +97,9 @@ function RegionSelect({
       >
         {optionsList.map((option, index) => (
           <li
-            className={`region-select__item ${
-              isDarkTheme ? 'region-select__item_theme_dark' : ''
-            }`}
+            className={clsx('region-select__item', {
+              'region-select__item_theme_dark': isDarkTheme,
+            })}
             id={option}
             key={uuidv4()}
             role='option'

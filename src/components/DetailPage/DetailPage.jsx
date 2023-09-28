@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import clsx from 'clsx';
 
 // IMPORT STYLES
 import './DetailPage.scss';
@@ -26,12 +27,8 @@ function DetailPage({ isDarkTheme, cards }) {
     const findCard = cards.find(
       (item) => item.cca3 === countryCode.toUpperCase(),
     );
-    if (!findCard) {
-      setPreloaderClass(false);
-    } else {
-      setCard(findCard);
-      setPreloaderClass(false);
-    }
+    setCard(findCard);
+    setPreloaderClass(false);
   }, [cards, countryCode, setPreloaderClass]);
 
   // HANDLE LANGUAGES RENDER
@@ -44,24 +41,23 @@ function DetailPage({ isDarkTheme, cards }) {
 
   // HANDLE CURRENCIES RENDER
   const handleCurrencies = useCallback((item) => {
-    const currenciesArr = Object.values(item.currencies).map(
-      (currency) => currency.name,
+    const currenciesArr = Object.keys(item.currencies).map(
+      (currencyKey) => item.currencies[currencyKey].name,
     );
-    return (
-      currenciesArr.join(', ') ||
-      'the country does not have an official currency'
-    );
+    return currenciesArr.length > 0
+      ? currenciesArr.join(', ')
+      : 'the country does not have an official currency';
   }, []);
 
   // HANDLE BORDER COUNTRIES LINKS RENDER
   const handleBorderCountriesButtons = useCallback(
-    () => {
-      const { borders } = card;
+    (cardData, cardsData) => {
+      const { borders } = cardData;
       const nameCountries = [];
       borders.forEach((inputCode) => {
-        cards.forEach((cardItem) => {
-          if (inputCode === cardItem.cca3) {
-            nameCountries.push(cardItem.name.common);
+        cardsData.forEach((item) => {
+          if (inputCode === item.cca3) {
+            nameCountries.push(item.name.common);
           }
         });
       });
@@ -70,30 +66,33 @@ function DetailPage({ isDarkTheme, cards }) {
           <Link
             to={`/${borders[index].toLowerCase()}`}
             key={uuidv4()}
-            className={`detail-page__link-country ${
-              isDarkTheme ? 'detail-page__link-country_theme_dark' : ''
-            }`}
+            className={clsx('detail-page__link-country', {
+              'detail-page__link-country_theme_dark': isDarkTheme,
+            })}
           >
             {country}
           </Link>
         ))
       ) : (
         <p
-          className={`detail-page__description-info detail-page__description-info_position_bottom ${
-            isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-          }`}
+          className={clsx(
+            'detail-page__description-info',
+            'detail-page__description-info_position_bottom',
+            {
+              'detail-page__description-info_theme_dark': isDarkTheme,
+            },
+          )}
         >
           the country has no land borders
         </p>
       );
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isDarkTheme],
   );
 
   // HANDLE BUTTON BACK CLICK
   const handleBtnBackClick = useCallback(() => {
-    if (window.history.state && window.history.state.idx > 0) {
+    if (window.history.state?.idx > 0) {
       navigate(-1);
     } else {
       navigate('/', { replace: true });
@@ -123,9 +122,9 @@ function DetailPage({ isDarkTheme, cards }) {
         <title>{`Countries Info - ${card.name.common}`}</title>
       </Helmet>
       <button
-        className={`detail-page__btn-back ${
-          isDarkTheme ? 'detail-page__btn-back_theme_dark' : ''
-        }`}
+        className={clsx('detail-page__btn-back', {
+          'detail-page__btn-back_theme_dark': isDarkTheme,
+        })}
         type='button'
         onClick={handleBtnBackClick}
       >
@@ -133,33 +132,32 @@ function DetailPage({ isDarkTheme, cards }) {
       </button>
       <article className='detail-page__wrapper'>
         <img
-          className={`detail-page__flag ${
-            isDarkTheme ? 'detail-page__flag_theme_dark' : ''
-          }`}
+          className={clsx('detail-page__flag', {
+            'detail-page__flag_theme_dark': isDarkTheme,
+          })}
           src={card.flags.svg}
           alt={card.flags.alt || `The flag of ${card.name.common}`}
         />
         <div className='detail-page__description-wrapper'>
           <h1
-            className={`detail-page__country-name ${
-              isDarkTheme ? 'detail-page__country-name_theme_dark' : ''
-            }`}
+            className={clsx('detail-page__country-name', {
+              'detail-page__country-name_theme_dark': isDarkTheme,
+            })}
           >
             {card.name.common}
           </h1>
           <div className='detail-page__list-wrapper'>
             <ul className='detail-page__description-list detail-page__description-list_position_left'>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Native Name:
                 </span>{' '}
@@ -167,64 +165,60 @@ function DetailPage({ isDarkTheme, cards }) {
                   card.name.common}
               </li>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Population:
                 </span>{' '}
                 {new Intl.NumberFormat().format(card.population)}
               </li>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Region:
                 </span>{' '}
                 {card.region}
               </li>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Sub Region:
                 </span>{' '}
                 {card.subregion || 'the country does not have a subregion'}
               </li>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Capital:
                 </span>{' '}
@@ -233,48 +227,45 @@ function DetailPage({ isDarkTheme, cards }) {
             </ul>
             <ul className='detail-page__description-list detail-page__description-list_position_bottom'>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Top Level Domain:
                 </span>{' '}
                 {card.tld.join(', ') || 'the country has no top level domain'}
               </li>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Currencies:
                 </span>{' '}
                 {handleCurrencies(card)}
               </li>
               <li
-                className={`detail-page__description-info ${
-                  isDarkTheme ? 'detail-page__description-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__description-info', {
+                  'detail-page__description-info_theme_dark': isDarkTheme,
+                })}
               >
                 <span
-                  className={`detail-page__description-info-accent ${
-                    isDarkTheme
-                      ? 'detail-page__description-info-accent_theme_dark'
-                      : ''
-                  }`}
+                  className={clsx('detail-page__description-info-accent', {
+                    'detail-page__description-info-accent_theme_dark':
+                      isDarkTheme,
+                  })}
                 >
                   Languages:
                 </span>{' '}
@@ -285,14 +276,14 @@ function DetailPage({ isDarkTheme, cards }) {
           {card.borders && (
             <div className='detail-page__border-wrapper'>
               <p
-                className={`detail-page__border-info ${
-                  isDarkTheme ? 'detail-page__border-info_theme_dark' : ''
-                }`}
+                className={clsx('detail-page__border-info', {
+                  'detail-page__border-info_theme_dark': isDarkTheme,
+                })}
               >
                 Border Countries:
               </p>
               <div className='detail-page__border-link-wrapper'>
-                {handleBorderCountriesButtons()}
+                {handleBorderCountriesButtons(card, cards)}
               </div>
             </div>
           )}

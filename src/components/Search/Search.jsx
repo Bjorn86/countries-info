@@ -1,5 +1,6 @@
 // IMPORT PACKAGES
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 // IMPORT STYLES
 import './Search.scss';
@@ -9,9 +10,9 @@ function Search({ isDarkTheme, onSearchChange, searchTerm }) {
   return (
     <form className='search' role='search'>
       <input
-        className={`search__input ${
-          isDarkTheme ? 'search__input_theme_dark' : ''
-        }`}
+        className={clsx('search__input', {
+          search__input_theme_dark: isDarkTheme,
+        })}
         id='search-input'
         type='search'
         name='search'

@@ -1,6 +1,7 @@
 // IMPORT PACKAGES
 import { Outlet, Route, Routes } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 // IMPORT STYLES
 import './PageContent.scss';
@@ -29,9 +30,9 @@ function PageContent({
         onThemeSwitchClick={onThemeSwitchClick}
       />
       <main
-        className={`page-content ${
-          isDarkTheme ? 'page-content_theme_dark' : ''
-        }`}
+        className={clsx('page-content', {
+          'page-content_theme_dark': isDarkTheme,
+        })}
       >
         <Routes>
           <Route

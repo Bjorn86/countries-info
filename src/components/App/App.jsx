@@ -42,12 +42,14 @@ function App() {
 
   // READ AND SAVE THEME
   const readAndSaveTheme = useCallback(() => {
-    const theme = localStorage.getItem('isDarkTheme');
-    if (JSON.parse(theme)) {
-      setDarkThemeClass(theme);
-    } else {
+    let theme = JSON.parse(localStorage.getItem('isDarkTheme'));
+
+    if (!theme) {
+      theme = isDarkTheme;
       localStorage.setItem('isDarkTheme', isDarkTheme);
     }
+
+    setDarkThemeClass(theme);
   }, [isDarkTheme]);
 
   // HANDLE SEARCH AND FILTER RESULT

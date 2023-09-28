@@ -1,6 +1,7 @@
 // IMPORT PACKAGES
 import { Link, Route, Routes } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 // IMPORT STYLES
 import './Header.scss';
@@ -8,16 +9,16 @@ import './Header.scss';
 // HEADER COMPONENT
 function Header({ isDarkTheme, onThemeSwitchClick }) {
   return (
-    <header className={`header ${isDarkTheme ? 'header_theme_dark' : ''}`}>
+    <header className={clsx('header', { header_theme_dark: isDarkTheme })}>
       <div className='header__wrapper'>
         <Routes>
           <Route
             path='/'
             element={
               <h1
-                className={`header__title ${
-                  isDarkTheme ? 'header__title_theme_dark' : ''
-                }`}
+                className={clsx('header__title', {
+                  header__title_theme_dark: isDarkTheme,
+                })}
               >
                 Where in the world?
               </h1>
@@ -28,9 +29,9 @@ function Header({ isDarkTheme, onThemeSwitchClick }) {
             element={
               <Link to='/' className='header__link'>
                 <h2
-                  className={`header__title ${
-                    isDarkTheme ? 'header__title_theme_dark' : ''
-                  }`}
+                  className={clsx('header__title', {
+                    header__title_theme_dark: isDarkTheme,
+                  })}
                 >
                   Where in the world?
                 </h2>
@@ -39,9 +40,9 @@ function Header({ isDarkTheme, onThemeSwitchClick }) {
           />
         </Routes>
         <button
-          className={`header__btn ${
-            isDarkTheme ? 'header__btn_theme_dark' : ''
-          }`}
+          className={clsx('header__btn', {
+            header__btn_theme_dark: isDarkTheme,
+          })}
           type='button'
           onClick={onThemeSwitchClick}
         >

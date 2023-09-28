@@ -1,5 +1,6 @@
 // IMPORT PACKAGES
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 // IMPORT STYLES
 import './Card.scss';
@@ -9,62 +10,62 @@ function Card({ card, isDarkTheme }) {
   return (
     <div className='card'>
       <img
-        className={`card__country-flag ${
-          isDarkTheme ? 'card__country-flag_theme_dark' : ''
-        }`}
+        className={clsx('card__country-flag', {
+          'card__country-flag_theme_dark': isDarkTheme,
+        })}
         src={card.flags.svg}
         alt={card.flags.alt || `The flag of ${card.name.common}`}
       />
       <div
-        className={`card__description-wrapper ${
-          isDarkTheme ? 'card__description-wrapper_theme_dark' : ''
-        }`}
+        className={clsx('card__description-wrapper', {
+          'card__description-wrapper_theme_dark': isDarkTheme,
+        })}
       >
         <h2
-          className={`card__country-name ${
-            isDarkTheme ? 'card__country-name_theme_dark' : ''
-          }`}
+          className={clsx('card__country-name', {
+            'card__country-name_theme_dark': isDarkTheme,
+          })}
         >
           {card.name.common}
         </h2>
         <ul className='card__country-description-list'>
           <li
-            className={`card__country-info ${
-              isDarkTheme ? 'card__country-info_theme_dark' : ''
-            }`}
+            className={clsx('card__country-info', {
+              'card__country-info_theme_dark': isDarkTheme,
+            })}
           >
             <span
-              className={`card__country-info-accent ${
-                isDarkTheme ? 'card__country-info-accent_theme_dark' : ''
-              }`}
+              className={clsx('card__country-info-accent', {
+                'card__country-info-accent_theme_dark': isDarkTheme,
+              })}
             >
               Population:
             </span>{' '}
             {new Intl.NumberFormat().format(card.population)}
           </li>
           <li
-            className={`card__country-info ${
-              isDarkTheme ? 'card__country-info_theme_dark' : ''
-            }`}
+            className={clsx('card__country-info', {
+              'card__country-info_theme_dark': isDarkTheme,
+            })}
           >
             <span
-              className={`card__country-info-accent ${
-                isDarkTheme ? 'card__country-info-accent_theme_dark' : ''
-              }`}
+              className={clsx('card__country-info-accent', {
+                'card__country-info-accent_theme_dark': isDarkTheme,
+              })}
             >
               Region:
             </span>{' '}
             {card.region}
           </li>
           <li
-            className={`card__country-info ${
-              isDarkTheme ? 'card__country-info_theme_dark' : ''
-            }`}
+            className={clsx('card__country-info', {
+              'card__country-info_theme_dark': isDarkTheme,
+            })}
           >
             <span
-              className={`card__country-info-accent ${
-                isDarkTheme ? 'card__country-info-accent_theme_dark' : ''
-              }`}
+              className={clsx('card__country-info-accent', {
+                'card__country-info-accent_theme_dark': isDarkTheme,
+              })}
             >
               Capital:
             </span>{' '}
